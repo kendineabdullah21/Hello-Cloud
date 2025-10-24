@@ -6,9 +6,9 @@ app = Flask(__name__)
 
 # Render'ın tanımladığı veritabanı bağlantısı
 DATABASE_URL = os.getenv(
-    "DATABASE_URL",
-    "postgresql://abdulleh:djphRJPLpomlNPYmvoqnJpDf11oK0v9t@dpg-d3tjhbhr0fns73ahthq0-a.oregon-postgres.render.com/hello_cloud2_db_7avp"
-)
+    "DATABASE_URL","postgresql://abdulleh:djphRJPLpomlNPYmvoqnJpDf11oK0v9t@dpg-d3tjhbhr0fns73ahthq0-a.oregon-postgres.render.com/hello_cloud2_db_7avp")
+   
+
 
 # HTML şablonu
 HTML = """
