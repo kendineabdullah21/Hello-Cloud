@@ -2,7 +2,7 @@ from flask import Flask, render_template_string, request
 import os
 import psycopg2
 
-app = Flask (_name_)
+app = Flask (__name__)
 
 #Render'ın otomatik tanımladığı veritabanı bağlantı bilgisi (DATABASE_URL ortam değişkeni)
 DATABASE_URL = os.getenv("DATABASE_URL","postgresql://abdulleh:djphRJPLpomlNPYmvoqnJpDf11oK0v9t@dpg-d3tjhbhr0fns73ahthq0-a.oregon-postgres.render.com/hello_cloud2_db_7avp")
@@ -19,7 +19,7 @@ HTML = """
         form {margin: 20px auto; }
         input { padding: 10px; font-size: 16px; }
         button {padding: 10px 15px; background: #4CAF50; color: white; border: none; border-radius: 6px; cursor: pointer; }
-        ul (list-style: none; padding: 0; )
+        ul { list-style: none; padding: 0; }
         li {background: white; margin: 5px auto; padding: 8px; border-radius: 5px; }
     </style>
 </head>
@@ -34,7 +34,7 @@ HTML = """
     <ul>
         {% for ad in isimler%}
              <li>{{ ad }}</li>
-        {%enfor%}
+        {% endfor %}
     </ul>
 </body>    
 </html>
@@ -53,7 +53,7 @@ def index():
    if request.method == "POST":
       isim = request.form.get("isim")
       if isim:
-         cur.execute("INSERT INTO ziyaretciler (isim VALUES (%s)", (isim,))
+         cur.execute("INSERT INTO ziyaretciler (isim) VALUES (%s)", (isim,))
          conn.commit()
 cur.execute("SELECT isim FROM ziyaretciler ORDER BY id DESC LIMIT 10")
 isimler = [row[0] for row in cur.fetchall()]
@@ -62,5 +62,5 @@ cur.close()
 conn.close()
 return render_template_string(HTML, isimler=isimler)
 
-if _name_ == "_main_":
+if __name__ == "__main__":
   app.run(host="0.0.0.0", port=5000)
